@@ -60,6 +60,18 @@
 (fill-circle 300 300 "red" 20)
 (fill-circle 300 300 "yellow" 10)
 (fill-circle 300 300 "blue" 5)
+(fill-circle 400 400 "blue" 5)
+(fill-circle 400 500 "green" 2)
+(fill-circle 300 300 "yellow" 1)
+(fill-circle 380 60 "yellow" 2)
+(fill-circle 700 320 "yellow" 8)
+(fill-circle 900 400 "yellow" 7)
+(fill-circle 1000 600 "red" 10)
+(fill-circle 800 550 "yellow" 1)
+(fill-circle 800 560 "yellow" 1)
+(fill-circle 900 500 "red" 5)
+(fill-circle 1000 100 "red" 5)
+(fill-circle 600 200 "yellow" 3)
 
 (defn fill-rect [x y color pixel]
   (set! (.-fillStyle ctx) color)
@@ -136,7 +148,7 @@
   (.beginPath ctx)
   (.moveTo ctx x1 y1)
   (.lineTo ctx x2 y2)
-  (set! (.-strokeStyle ctx) "#B4B4B4")
+  (set! (.-strokeStyle ctx) "#3E3E3E")
   (.stroke ctx))
 
 (def horizontal-grid-lines [{:x1 1450 :y1 600 :x2 150 :y2 600}])
