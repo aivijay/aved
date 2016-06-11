@@ -4,12 +4,6 @@
 
 (enable-console-print!)
 
-(.log js/console "hello CS")
-(.log js/console "PLOP is here")
-(.log js/console "SOME MORE THINGS")
-(.log js/console "SOME more and more")
-(.log js/console "SOME more and morei 2222222")
-
 (def canvas (.getElementById js/document "myCanvas"))
 (def ctx (.getContext canvas "2d"))
 
@@ -44,7 +38,6 @@
     (.subscribe (fn [xysin]
                   (.log js/console (str xysin)))))
 
-
 ;;ctx.beginPath();
 ;;ctx.arc(100,75,50,0,2*Math.PI);
 ;;ctx.stroke(); ;; draws the border line
@@ -54,8 +47,7 @@
   (set! (.-lineWidth ctx) 0)
   (.beginPath ctx)
   (.arc ctx x y size 0 (* 2 Math/PI))
-  (.fill ctx)
-  )
+  (.fill ctx))
 
 (defn fill-rect [x y w h color]
   (set! (.-fillStyle ctx) color)
@@ -182,7 +174,6 @@
   (dotimes [n vertical-lines] (.log js/console "Index: " n)
            (draw-line (+ x1 (* n 100)) y1 (+ x2 (* n 100)) y2)))
 
-
 (fill-rect 1440 20 40 100 "red")
 (fill-rect 1440 120 40 100 "orange")
 (fill-rect 1440 220 40 100 "#F5D282")
@@ -190,7 +181,6 @@
 (fill-rect 1440 420 40 100 "#B1D8FA")
 (fill-rect 1440 520 40 100 "#3874A8")
 (fill-rect 1440 620 40 100 "#7D4BBF")
-
 
 (write-text-s1-black "DE" 1450 74)
 (write-text-s1-black "LT" 1450 174)
