@@ -1,5 +1,7 @@
 # aved
 
+AVED - Advance Visual Event Detection
+
 
 ## Development
 
