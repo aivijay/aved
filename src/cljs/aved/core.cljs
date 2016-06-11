@@ -73,16 +73,16 @@
 (fill-circle 1000 100 "red" 5)
 (fill-circle 600 200 "yellow" 3)
 
-(defn fill-rect [x y color pixel]
+(defn fill-rect [x y w h color]
   (set! (.-fillStyle ctx) color)
-  (.fillRect ctx x y 2 2))
+  (.fillRect ctx x y w h))
 
 ;; fill rect for 1 pixel size
-(defn fill-rect1 [x y color]
-  (fill-rect x y color 1))
+(defn fill-rect1 [x y w h color]
+  (fill-rect x y w h color))
 
-(defn fill-rect2 [x y color]
-  (fill-rect x y color 2))
+(defn fill-rect2 [x y w h color]
+  (fill-rect x y w h color))
 
 
 (def color (.map sine-wave
@@ -107,12 +107,35 @@
 
 (def mouse-over (from-event canvas "over"))
 
-(defn write-text []
+(defn write-text [text x y]
   (set! (.-font ctx) "20px Arial")
   (set! (.-fillStyle ctx) "white")
-  (.fillText ctx "Drugs" 780 780))
+  (.fillText ctx text x y))
 
-(write-text)
+(defn write-text-s1 [text x y]
+  (set! (.-font ctx) "13px Arial")
+  (set! (.-fillStyle ctx) "white")
+  (.fillText ctx text x y))
+
+(defn write-text-s1-black [text x y]
+  (set! (.-font ctx) "13px Arial")
+  (set! (.-fillStyle ctx) "black")
+  (.fillText ctx text x y))
+
+(write-text "Drugs" 780 710)
+(def right-col-legends {:DE "Death"
+                        :LT "Life Threatening"
+                        :HO "Hospitalization"
+                        :DS "Disability"
+                        :CA "Congenetial Anomaly"
+                        :RI "Required Intervention"
+                        :OT "Other"})
+
+(defn serialize [m sep] (str (clojure.string/join sep (map (fn [[k v]] (str (name k) " " v)) m)) "\n"))
+(.log js/console (str "name = " (serialize right-col-legends " | ")))
+(def right-col-legend-str (serialize right-col-legends " | "))
+
+(write-text-s1 right-col-legend-str 730 780)
 
 ;; Rotate Text on CANVAS
 ;;context.save();
@@ -151,7 +174,7 @@
   (set! (.-strokeStyle ctx) "#3E3E3E")
   (.stroke ctx))
 
-(def horizontal-grid-lines [{:x1 1450 :y1 600 :x2 150 :y2 600}])
+(def horizontal-grid-lines [{:x1 1400 :y1 600 :x2 150 :y2 600}])
 (def vertical-grid-lines [{:x1 200 :y1 650 :x2 200 :y2 50 }])
 (def horizontal-lines 6)
 (def vertical-lines 13)
@@ -174,3 +197,41 @@
 (doseq [{x1 :x1 y1 :y1 x2 :x2 y2 :y2} vertical-grid-lines]
   (dotimes [n vertical-lines] (.log js/console "Index: " n)
            (draw-line (+ x1 (* n 100)) y1 (+ x2 (* n 100)) y2)))
+
+
+(fill-rect 1440 20 40 100 "red")
+(fill-rect 1440 120 40 100 "orange")
+(fill-rect 1440 220 40 100 "#F5D282")
+(fill-rect 1440 320 40 100 "#F5F38C")
+(fill-rect 1440 420 40 100 "#B1D8FA")
+(fill-rect 1440 520 40 100 "#3874A8")
+(fill-rect 1440 620 40 100 "#7D4BBF")
+
+
+(write-text-s1-black "DE" 1450 74)
+(write-text-s1-black "LT" 1450 174)
+(write-text-s1-black "HO" 1450 274)
+(write-text-s1-black "DS" 1450 374)
+(write-text-s1-black "CA" 1450 474)
+(write-text-s1-black "RI" 1450 574)
+(write-text-s1-black "OT" 1450 674)
+
+(write-text-s1 "AVANDIA" 175 670)
+(write-text-s1 "ACTOS" 275 670)
+(write-text-s1 "BONIVA" 375 670)
+(write-text-s1 "PRADAXA" 475 670)
+(write-text-s1 "SEROQUEL" 575 670)
+
+(write-text-s1 "Myocordial Infarction" 40 600)
+(write-text-s1 "Bladder Cancer" 40 500)
+(write-text-s1 "Cardiac Failure" 40 430)
+(write-text-s1 "Gastrointestinal" 40 380)
+(write-text-s1 "Hemorrihage" 40 393)
+(write-text-s1 "Cerebuvascular Accident" 40 300)
+(write-text-s1 "Death" 40 250)
+(write-text-s1 "Coronary Artery Disease" 40 210)
+(write-text-s1 "Femur Fracture" 40 180)
+(write-text-s1 "Haematuria" 40 160)
+(write-text-s1 "Pancreatitis" 40 140)
+(write-text-s1 "Type 2" 40 100)
+(write-text-s1 "Diabetes Meilitus" 40 120)
