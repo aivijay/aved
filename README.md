@@ -2,6 +2,9 @@
 
 AVED - Advance Visual Event Detection
 
+![alt text][logo]
+
+[logo]: https://github.com/aivijay/aved/blob/master/images/aved1.png "AVED"
 
 ## Development
 
